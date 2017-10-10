@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -13,6 +13,10 @@ import { ClausComponent } from './claus/claus.component';
 import { ClauListComponent } from './claus/clau-list/clau-list.component';
 import { ClauDetallComponent } from './claus/clau-detall/clau-detall.component';
 
+import { ClausService } from './claus/claus.service';
+import { ClauItemComponent } from './claus/clau-list/clau-item/clau-item.component';
+import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,15 +26,18 @@ import { ClauDetallComponent } from './claus/clau-detall/clau-detall.component';
     MembreDetallComponent,
     ClausComponent,
     ClauListComponent,
-    ClauDetallComponent
+    ClauDetallComponent,
+    ClauItemComponent,
+    ClauEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ClausService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

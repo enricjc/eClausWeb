@@ -1,10 +1,10 @@
 export class Clau{
-  id: string;
+  sid: string;
   nom: string;
   descripcio: string;
 
-  constructor (id: string, nom: string, descripcio: string){
-    this.id = id;
+  constructor (sid: string, nom: string, descripcio: string){
+    this.sid = sid;
     this.nom = nom;
     this.descripcio = descripcio;
   }

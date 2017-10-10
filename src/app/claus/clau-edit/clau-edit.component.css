@@ -1,0 +1,19 @@
+h5{
+  margin-left: 20px;
+}
+
+label {
+  margin-right:10px;
+}
+
+.form-inline .form-group {
+  margin-right:50px;
+}
+
+.form-control.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+
+.help-block{
+  color:red;
+}
