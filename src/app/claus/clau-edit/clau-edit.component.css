@@ -14,6 +14,10 @@ label {
   border: 1px solid red;
 }
 
+.form-control.ng-touched.ng-valid{
+  border: 1px solid green;
+}
+
 .help-block{
   color:red;
 }
