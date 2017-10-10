@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params} from '@angular/router';
-import { FormGroup } from '@angular/forms';
 
 import { ClausService } from '../claus.service';
 
@@ -14,7 +13,6 @@ import { Clau } from '../clau.model';
 export class ClauDetallComponent implements OnInit {
   clau: Clau;
   index:number;
-  clauForm: FormGroup;
 
   constructor(private clausService: ClausService,
               private route: ActivatedRoute) { }
@@ -26,9 +24,5 @@ export class ClauDetallComponent implements OnInit {
             this.index = +params['id'];
             this.clau = this.clausService.getClau(this.index);
         });
-
-    this.clauForm = new FormGroup({
-
-    });
   }
 }
