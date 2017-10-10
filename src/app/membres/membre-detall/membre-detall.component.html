@@ -1,3 +1,12 @@
-<p>
-  membre-detall works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <h1>{{membre.nom}} {{membre.cognoms}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-10 col-md-2">
+    <button class="btn btn-primary" routerLink="edit">Edita</button>
+  </div>
+</div>
+<hr>
+<router-outlet></router-outlet>

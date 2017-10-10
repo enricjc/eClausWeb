@@ -16,18 +16,16 @@
         </thead>
         <tbody>
           <!--LOOP per cada membre actiu -->
-          <tr>
-
-            <td>John Pepito</td>
-            <td>Doe Dungar</td>
-            <td>99999999999</td>
-            <td>john@example.com</td>
+          <tr *ngFor="let membre of membres; let i = index">
+            <td>{{membre.nom}}</td>
+            <td>{{membre.cognoms}}</td>
+            <td>{{membre.telefon}}</td>
+            <td>{{membre.email}}</td>
+            <td><a (click)="onAssign()" ><img src="http://via.placeholder.com/30x30"></a></td>
             <td>
-              <span class="glyphicon glyphicon-list-alt"></span>
-              <span class="glyphicon glyphicon-pencil"></span>
-              <span class="glyphicon glyphicon-remove"></span>
+              <span class="glyphicon glyphicon-list-alt" [routerLink]="[i]"></span>
+              <span class="glyphicon glyphicon-remove" (click)="onDeleteMembre(i)"></span>
             </td>
-            <td><a href="#"><img src="http://via.placeholder.com/30x30"></a></td>
           </tr>
         </tbody>
       </table>
