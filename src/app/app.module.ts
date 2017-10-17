@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +16,8 @@ import { ClauListComponent } from './claus/clau-list/clau-list.component';
 import { ClauDetallComponent } from './claus/clau-detall/clau-detall.component';
 import { ClauItemComponent } from './claus/clau-list/clau-item/clau-item.component';
 import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
+
+import { AlertAssignarClauComponent } from './claus/clau-list/clau-item/modal-assignar-clau-item.component';
 
 import { MembreService } from './membres/membre.service';
 import { ClausService } from './claus/claus.service';
@@ -32,16 +35,21 @@ import { ClausService } from './claus/claus.service';
     ClauDetallComponent,
     ClauItemComponent,
     ClauEditComponent,
-    MembreEditComponent
+    MembreEditComponent,
+    AlertAssignarClauComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BootstrapModalModule
   ],
   providers: [ClausService, MembreService],
+  entryComponents: [
+        AlertAssignarClauComponent
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
