@@ -1,0 +1,28 @@
+<h1>Accedeix al web</h1>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input class="form-control" type="text" id="email" formControlName="email">
+      </div>
+      <span *ngIf="signinForm.get('email').hasError('email') && !signinForm.get('email').hasError('required') && !signinForm.get('email').valid && signinForm.get('email').touched" class="help-block">
+        E-mail no vàlid
+      </span>
+      <span *ngIf="signinForm.get('email').hasError('required') && !signinForm.get('email').valid && signinForm.get('email').touched" class="help-block">
+        Cal omplir el camp
+      </span>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" id="password" formControlName="password">
+        </div>
+        <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="help-block">
+          Cal omplir el camp
+        </span>
+      <div class="col-md-3 col-md-offset-9">
+        <button class="btn btn-success" type="submit" [disabled]="!signinForm.valid">Accedeix</button>
+      </div>
+    </form>
+  </div>
+</div>

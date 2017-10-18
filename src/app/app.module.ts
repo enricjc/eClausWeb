@@ -5,6 +5,10 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
+import { MembreService } from './membres/membre.service';
+import { ClausService } from './claus/claus.service';
+import { AuthService} from './auth/auth.service';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MembresComponent } from './membres/membres.component';
@@ -16,11 +20,9 @@ import { ClauListComponent } from './claus/clau-list/clau-list.component';
 import { ClauDetallComponent } from './claus/clau-detall/clau-detall.component';
 import { ClauItemComponent } from './claus/clau-list/clau-item/clau-item.component';
 import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
-
 import { AlertAssignarClauComponent } from './claus/clau-list/clau-item/modal-assignar-clau-item.component';
-
-import { MembreService } from './membres/membre.service';
-import { ClausService } from './claus/claus.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { ClausService } from './claus/claus.service';
     ClauItemComponent,
     ClauEditComponent,
     MembreEditComponent,
-    AlertAssignarClauComponent
+    AlertAssignarClauComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ import { ClausService } from './claus/claus.service';
     AppRoutingModule,
     BootstrapModalModule
   ],
-  providers: [ClausService, MembreService],
+  providers: [ClausService, MembreService, AuthService],
   entryComponents: [
         AlertAssignarClauComponent
       ],

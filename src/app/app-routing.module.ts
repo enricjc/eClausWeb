@@ -9,6 +9,8 @@ import { ClausComponent } from './claus/claus.component';
 import { ClauDetallComponent } from './claus/clau-detall/clau-detall.component';
 import { ClauListComponent } from './claus/clau-list/clau-list.component';
 import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 const appRoutes: Routes = [
   { path: '',  redirectTo: '/claus', pathMatch: 'full' },
@@ -25,6 +27,8 @@ const appRoutes: Routes = [
       { path: ':id/edit', component: ClauEditComponent }
     ]
   },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
 ];
 
 @NgModule({

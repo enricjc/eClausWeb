@@ -1,0 +1,37 @@
+<h1>Registre nou usuari</h1>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input class="form-control" type="text" id="email" formControlName="email">
+      </div>
+      <span *ngIf="signupForm.get('email').hasError('email') && !signupForm.get('email').hasError('required') && !signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">
+        E-mail no vàlid
+      </span>
+      <span *ngIf="signupForm.get('email').hasError('required') && !signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">
+        Cal omplir el camp
+      </span>
+      <div class="form-group">
+          <span class="glyphicon glyphicon-alert" *ngIf="signupForm.hasError('mismatch')"></span>
+          <label for="password">Password</label>
+          <input class="form-control" type="password" id="password" formControlName="password">
+        </div>
+        <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched" class="help-block">
+          El password ha de tenir un mínim de {{MIN_LENGTH_PWD}} caràcters
+        </span>
+        <div class="form-group">
+          <span class="glyphicon glyphicon-alert" *ngIf="signupForm.hasError('mismatch')"></span>
+          <label for="confirmPassword">Confirm password</label>
+          <input class="form-control" type="password" id="confirmPassword" formControlName="confirmPassword">
+        </div>
+        <span *ngIf="signupForm.hasError('mismatch') && signupForm.get('password').touched && signupForm.get('confirmPassword').touched" class="help-block">
+            Els passwords no són iguals. Comprovi els dos camps.
+          </span>
+      <div class="col-md-3 col-md-offset-9">
+        <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Registre</button>
+      </div>
+    </form>
+  </div>
+</div>
