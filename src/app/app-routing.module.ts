@@ -13,7 +13,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 
 const appRoutes: Routes = [
-  { path: '',  redirectTo: '/claus', pathMatch: 'full' },
+  { path: '',  redirectTo: 'signup', pathMatch: 'full' },
+  { path: 'api', component: SignupComponent },
   {
     path: 'membres', component: MembresComponent, children:[
       { path: '', component: MembreListComponent, pathMatch: 'full' },

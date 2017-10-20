@@ -1,11 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
+const API = "/api"
+
+mongoose.connect('mongodb://localhost:27017/eclaus');
 const app = express();
 
-// API file for interacting with MongoDB
-const api = require('./server/routes/api');
+// Routes for interacting with MongoDB
+const users = require('./server/routes/userRoutes');
 
 // Parsers
 app.use(bodyParser.json());
@@ -15,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // API location
-app.use('/api', api);
+app.use(API + '/users', users);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
