@@ -8,6 +8,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { MembreService } from './membres/membre.service';
 import { ClausService } from './claus/claus.service';
 import { AuthService} from './auth/auth.service';
+import { DataService} from './data.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -50,7 +51,7 @@ import { SigninComponent } from './auth/signin/signin.component';
     AppRoutingModule,
     BootstrapModalModule
   ],
-  providers: [ClausService, MembreService, AuthService],
+  providers: [ClausService, MembreService, AuthService, DataService],
   entryComponents: [
         AlertAssignarClauComponent
       ],
