@@ -8,6 +8,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { MembreService } from './membres/membre.service';
 import { ClausService } from './claus/claus.service';
 import { AuthService} from './auth/auth.service';
+import {AuthGuard} from './auth/auth.guard';
 import { DataService} from './data.service';
 
 import { AppComponent } from './app.component';
@@ -24,7 +25,6 @@ import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
 import { AlertAssignarClauComponent } from './claus/clau-list/clau-item/modal-assignar-clau-item.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { SigninComponent } from './auth/signin/signin.component';
     AppRoutingModule,
     BootstrapModalModule
   ],
-  providers: [ClausService, MembreService, AuthService, DataService],
+  providers: [ClausService, MembreService, AuthService, AuthGuard, DataService],
   entryComponents: [
         AlertAssignarClauComponent
       ],

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
-import { AuthService} from '../auth.service';
-import { DataService} from '../../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -10,16 +11,26 @@ import { DataService} from '../../data.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  submittedForm: Boolean = false;
   signinForm: FormGroup;
+  tokenSubscription: Subscription;
 
   constructor(private authService: AuthService,
-              private dataService: DataService) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.initForm();
-    this.dataService.getUsers()
+    this.tokenSubscription = this.authService.tokenChanged
+      .subscribe(
+        (token: string) => {
+          if(token != null){
+            this.router.navigate(['/claus'])
+          }
+        }
+      );
+    /*this.dataService.getUsers()
       .then(result => console.log(result))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));*/
   }
 
   private initForm() {
@@ -31,5 +42,6 @@ export class SigninComponent implements OnInit {
 
   onSubmit() {
     this.authService.signinUser(this.signinForm.value.email, this.signinForm.value.password);
+    this.submittedForm = true;
   }
 }

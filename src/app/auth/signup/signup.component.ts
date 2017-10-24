@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 import { AuthService} from '../auth.service';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,9 +13,12 @@ import { AuthService} from '../auth.service';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  signupSubscription: Subscription;
   MIN_LENGTH_PWD = 4;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private dataService: DataService,
+              private router: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -38,7 +44,12 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.addUser(this.signupForm.value.email, this.signupForm.value.password);
+    this.authService.signupUser(this.signupForm.value.email, this.signupForm.value.password);
+    /*this.signupSubscription = this.dataService.addUser(this.signupForm.value.email, this.signupForm.value.password)
+      .subscribe(
+      data => console.log(data),
+      err => console.log(err)
+    );*/
   }
 
 }

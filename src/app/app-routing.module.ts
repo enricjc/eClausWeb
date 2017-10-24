@@ -12,17 +12,19 @@ import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 
+import {AuthGuard} from './auth/auth.guard';
+
 const appRoutes: Routes = [
   { path: '',  redirectTo: 'signup', pathMatch: 'full' },
   { path: 'api', component: SignupComponent },
   {
-    path: 'membres', component: MembresComponent, children:[
+    path: 'membres', component: MembresComponent, canActivate: [AuthGuard], children:[
       { path: '', component: MembreListComponent, pathMatch: 'full' },
       { path: ':id', component: MembreDetallComponent },
       { path: ':id/edit', component: MembreEditComponent }
     ] },
   {
-    path: 'claus', component: ClausComponent, children: [
+    path: 'claus', component: ClausComponent, canActivate: [AuthGuard], children: [
       { path: '', component: ClauListComponent, pathMatch: 'full' },
       { path: ':id', component: ClauDetallComponent },
       { path: ':id/edit', component: ClauEditComponent }

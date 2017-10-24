@@ -3,13 +3,18 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
+const db = require('./server/config/database');
 const API = "/api"
 
-mongoose.connect('mongodb://localhost:27017/eclaus');
+mongoose.connect(db.database);
 const app = express();
 
 // Routes for interacting with MongoDB
 const users = require('./server/routes/userRoutes');
+const auth = require('./server/routes/authRoutes');
+
+//Passport
+//app.use(passport.initialize());
 
 // Parsers
 app.use(bodyParser.json());
@@ -20,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // API location
 app.use(API + '/users', users);
+app.use(API + '/auth', auth);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {

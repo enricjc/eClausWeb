@@ -1,20 +1,49 @@
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
 
-import { User } from './user.model';
+import { DataService } from '../data.service';
 
 @Injectable()
 export class AuthService {
-  users: User[] = [];
+  token: string;
+  signupSubscription: Subscription;
+  signinSubscription: Subscription;
+  tokenChanged = new Subject<string>();
 
-  constructor() { }
+  constructor(private dataService: DataService,
+              private router: Router) { }
 
-  addUser(email: string, password: string){
-    this.users.push(new User(email, password));
-    console.log(this.users);
+  signupUser(email: string, password: string){
+    this.signupSubscription = this.dataService.addUser(email, password)
+      .subscribe(
+      data => this.router.navigate(['/signin']),
+      err => console.log(err)
+      );
   }
 
   signinUser(email: string, password: string){
-    const user = new User(email, password);
-    console.log(this.users.find(u=> u.email === user.email && u.password === user.password));
+    this.signupSubscription = this.dataService.checkUser(email, password)
+      .subscribe(
+      data => {
+        this.token = data;
+        this.tokenChanged.next(this.token);
+      },
+      err => console.log(err)
+      );
+  }
+
+  getToken() {
+    return this.token;
+  }
+
+  isAuthenticated() {
+    return this.token != null;
+  }
+
+  logout() {
+    this.token = null;
+    this.router.navigate(['/signin']);
   }
 }

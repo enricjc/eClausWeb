@@ -23,6 +23,9 @@
       <div class="col-md-3 col-md-offset-9">
         <button class="btn btn-success" type="submit" [disabled]="!signinForm.valid">Accedeix</button>
       </div>
+      <span *ngIf="submittedForm && !authService.isAuthenticated()" class="help-block">
+        Credencials no vàlides
+      </span>
     </form>
   </div>
 </div>

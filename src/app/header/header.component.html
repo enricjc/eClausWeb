@@ -11,13 +11,13 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a routerLink="membres">Membres</a></li>
-        <li><a routerLink="claus">Claus</a></li>
+        <li><a routerLink="membres" *ngIf="authService.isAuthenticated()">Membres</a></li>
+        <li><a routerLink="claus" *ngIf="authService.isAuthenticated()">Claus</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="signup">Registre</a></li>
-        <li><a routerLink="signin">Login</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a routerLink="signup" *ngIf="!authService.isAuthenticated()">Registre</a></li>
+        <li><a routerLink="signin" *ngIf="!authService.isAuthenticated()">Login</a></li>
+        <li><a style="cursor: pointer;" (click)="logout()" *ngIf="authService.isAuthenticated()">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

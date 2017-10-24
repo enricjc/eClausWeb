@@ -49,7 +49,7 @@ module.exports = {
     create: function (req, res) {
         var user = new userModel({
 			email : req.body.email,
-			password : req.body.password
+			password : req.body.password,
 
         });
 
@@ -84,7 +84,7 @@ module.exports = {
 
             user.email = req.body.email ? req.body.email : user.email;
 			user.password = req.body.password ? req.body.password : user.password;
-			
+
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
