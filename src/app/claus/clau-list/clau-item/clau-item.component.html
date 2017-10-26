@@ -2,7 +2,7 @@
   <a style="cursor: pointer;" (click)="onChange(index)"><img src="http://via.placeholder.com/100x100"></a>
 </div>
 <div class="col-md-4 clau-nom" style="margin-left:10px;">
-  <a style="cursor: pointer;" [routerLink]="['/claus', index]" routerLinkActive="active" class="list-group-item clearfix">
+  <a style="cursor: pointer;" [routerLink]="['/claus', sid]" routerLinkActive="active" class="list-group-item clearfix">
     <h3>{{clau.nom}}</h3>
     <p>{{clau.descripcio}}</p>
   </a>

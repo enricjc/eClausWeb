@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Clau } from '../clau.model';
@@ -9,20 +9,34 @@ import { ClausService } from '../claus.service';
   templateUrl: './clau-list.component.html',
   styleUrls: ['./clau-list.component.css']
 })
-export class ClauListComponent implements OnInit {
-  claus: Clau[]
+export class ClauListComponent implements OnInit, OnDestroy {
+  claus: any[]
   subscription: Subscription;
+  clausSubs: Subscription;
 
   constructor(private clausService: ClausService) { }
 
   ngOnInit() {
-    this.subscription = this.clausService.clausChanged
+    // TODO
+    // Cal crear la lògica backend MEMBRE abans de modificar aquesta funcionalitat.
+    /*this.subscription = this.clausService.clausChanged
       .subscribe(
         (claus: Clau[]) => {
             this.claus = claus;
         }
+    );*/
+    this.clausSubs = this.clausService.getClaus()
+      .subscribe(
+        (claus: any) => {
+            this.claus = claus;
+        }
     );
-    this.claus = this.clausService.getClaus();
+  }
+
+  ngOnDestroy() {
+    if (this.clausSubs) {
+      this.clausSubs.unsubscribe();
+    }
   }
 
 }

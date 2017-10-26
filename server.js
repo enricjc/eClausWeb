@@ -12,6 +12,7 @@ const app = express();
 // Routes for interacting with MongoDB
 const users = require('./server/routes/userRoutes');
 const auth = require('./server/routes/authRoutes');
+const claus = require('./server/routes/clauRoutes');
 
 //Passport
 //app.use(passport.initialize());
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // API location
 app.use(API + '/users', users);
 app.use(API + '/auth', auth);
+app.use(API + '/claus', claus);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {

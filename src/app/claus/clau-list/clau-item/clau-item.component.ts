@@ -13,6 +13,7 @@ import { DialogService } from 'ng2-bootstrap-modal';
 export class ClauItemComponent implements OnInit {
   @Input() clau: Clau;
   @Input() index: number;
+  @Input() sid: string;
 
   constructor(private clausService: ClausService,
     private dialogService: DialogService) { }

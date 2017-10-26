@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
 import { ClausService } from '../claus.service';
 
@@ -12,44 +13,72 @@ import { Clau } from '../clau.model';
   templateUrl: './clau-edit.component.html',
   styleUrls: ['./clau-edit.component.css']
 })
-export class ClauEditComponent implements OnInit {
-  clau: Clau;
-  index: number;
+export class ClauEditComponent implements OnInit, OnDestroy {
+  clau: any;
+  id: string;
   clauForm: FormGroup;
+  getClauSubscription: Subscription;
+  updateClauSubscription: Subscription;
+
   MIN_LENGTH_NOM = 5;
   MAX_LENGTH_NOM = 30;
   MIN_LENGTH_DESCRIPCIO = 15;
   MAX_LENGTH_DESCRIPCIO = 200;
 
   constructor(private clausService: ClausService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
       (params: Params) => {
-        this.index = +params['id'];
-        this.clau = this.clausService.getClau(this.index);
+        this.id = params['id'];
       });
+
+    this.getClauSubscription = this.clausService.getClau(this.id)
+      .subscribe(
+      (clau: any) => {
+        this.clau = clau;
+        this.clauForm.patchValue({
+          nom: this.clau.nom,
+          descripcio: this.clau.descripcio
+        });
+      },
+      error => console.log(error)
+      );
 
     this.initForm();
   }
 
+  ngOnDestroy() {
+    if (this.getClauSubscription) {
+      this.getClauSubscription.unsubscribe();
+    }
+    if (this.updateClauSubscription) {
+      this.updateClauSubscription.unsubscribe();
+    }
+  }
+
   private initForm() {
     this.clauForm = new FormGroup({
-      'nom': new FormControl(this.clau.nom, [Validators.required, Validators.minLength(this.MIN_LENGTH_NOM), Validators.maxLength(this.MAX_LENGTH_NOM)]),
-      'descripcio': new FormControl(this.clau.descripcio, [Validators.required, Validators.minLength(this.MIN_LENGTH_DESCRIPCIO), Validators.maxLength(this.MAX_LENGTH_DESCRIPCIO)])
+      'nom': new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH_NOM), Validators.maxLength(this.MAX_LENGTH_NOM)]),
+      'descripcio': new FormControl('', [Validators.required, Validators.minLength(this.MIN_LENGTH_DESCRIPCIO), Validators.maxLength(this.MAX_LENGTH_DESCRIPCIO)])
     });
   }
 
-  onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route});
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onSubmit() {
-    console.log(this.clauForm);
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.updateClauSubscription = this.clausService.updateClau(this.clau._id, this.clauForm.value.nom, this.clauForm.value.descripcio, '')
+      .subscribe(
+      (clau: any) => {
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
+      error => console.log(error)
+      );
   }
 
   minLength(minimum) {

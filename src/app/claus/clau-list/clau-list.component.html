@@ -1,10 +1,10 @@
 <h1>Llistat claus disponibles</h1>
 <hr>
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let clau of claus;let i = index">
+  <li class="list-group-item" *ngFor="let clau of claus">
     <div class="row">
       <div class="col-md-12">
-        <app-clau-item  [clau]="clau" [index]="i"></app-clau-item>
+        <app-clau-item  [clau]="clau" sid="{{clau._id}}"></app-clau-item>
       </div>
     </div>
   </li>
