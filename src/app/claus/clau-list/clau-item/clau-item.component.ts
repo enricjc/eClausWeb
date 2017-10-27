@@ -21,12 +21,4 @@ export class ClauItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onChange(index: number) {
-    this.dialogService.addDialog(AlertAssignarClauComponent,
-      {
-        title: 'Assignació de claus',
-        message: 'Selecciona el nou propietari',
-        indexClau: index
-      });
-  }
 }

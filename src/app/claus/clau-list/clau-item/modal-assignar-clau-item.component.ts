@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Membre } from '../../../membres/membre.model';
+import { Subscription } from 'rxjs/Subscription';
 
 import { ClausService } from '../../claus.service';
 import { MembreService } from '../../../membres/membre.service';
@@ -10,8 +10,11 @@ export interface AlertAssignarClauModel {
   title: string;
   message: string;
   indexClau: number;
-  membres: Membre[];
+  idClau: string;
+  idPropietari: string;
+  membres: any[];
   assignForm: FormGroup;
+  getMembresSubscription: Subscription;
 }
 
 @Component({
@@ -30,7 +33,7 @@ export interface AlertAssignarClauModel {
                             <div class="modal-body">
                                <select class="form-control" formControlName="membre" id="membre">
                                   <option *ngFor="let m of membres; let i = index;"
-                                         [value]="i">
+                                         [value]="m._id">
                                    {{m.nom}} {{m.cognoms}}
                                  </option>
                                </select>
@@ -47,14 +50,22 @@ export class AlertAssignarClauComponent extends DialogComponent<AlertAssignarCla
   title: string;
   message: string;
   indexClau: number;
-  membres: Membre[];
+  idClau: string;
+  idPropietari: string;
+  membres: any[];
   assignForm: FormGroup;
+  getMembresSubscription: Subscription;
 
   constructor(dialogService: DialogService,
     private clausService: ClausService,
     private membresService: MembreService) {
     super(dialogService);
-    this.membres = this.membresService.getMembres();
+    this.getMembresSubscription = this.membresService.getMembres()
+      .subscribe(
+      (membres: any) => {
+        this.membres = membres;
+      }
+      );
     this.initForm();
   }
 
@@ -66,7 +77,7 @@ export class AlertAssignarClauComponent extends DialogComponent<AlertAssignarCla
 
   onSubmit() {
     const indexMembre = this.assignForm.value['membre'];
-    this.clausService.assignarPropietariClau(this.indexClau, indexMembre);
+    this.clausService.assignarPropietariClau(this.idClau, this.assignForm.value.membre);
   }
 
 }

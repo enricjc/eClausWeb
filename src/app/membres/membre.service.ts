@@ -1,58 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { Membre } from './membre.model';
 
 @Injectable()
 export class MembreService {
-  membresChanged = new Subject<Membre[]>();
 
-  private membres: Membre[] = [
-    new Membre(
-      'Enric',
-      'Jódar',
-      'enric@enric.cat',
-      '659656556'
-    ),
-    new Membre(
-      'Pere',
-      'Campi',
-      'pere@campi.cat',
-      '789656556'
-    ),
-    new Membre(
-      'Arnau',
-      'Carbu',
-      'arnau@carbu.cat',
-      '069656556'
-    ),
-    new Membre(
-      'Arnau',
-      'Olesti',
-      'arnau@olesti.cat',
-      '559656556'
-    ),
-    new Membre(
-      'Jesús',
-      'Torres',
-      'jesus@torres.cat',
-      '339656556',
-    ),
-  ];
+  private membres: Membre[] = [];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
-  getMembres(){
-    return this.membres.slice();
+  getMembres(): Observable<any> {
+    return this.http.get('/api/membres')
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Error al servidor'));
   }
 
-  getMembre(index: number){
-    return this.membres[index];
+  getMembre(id: string): Observable<any>{
+    return this.http.get('/api/membres/' + id)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Error al servidor'));
   }
 
-  deleteMembre(index: number){
-    this.membres.splice(index, 1);
-    this.membresChanged.next(this.membres.slice());
+  updateMembre(id: string, nom: string, cognoms: string, telefon: string, email: string): Observable<any> {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    var params = new URLSearchParams();
+    params.append('nom', nom);
+    params.append('cognoms', cognoms);
+    params.append('telefon', telefon);
+    params.append('email', email);
+
+    var options = new RequestOptions({ headers: headers });
+
+    return this.http.put('/api/membres/' + id, params.toString(), options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Error al servidor'));
+
+  }
+
+  deleteMembre(id: string) : Observable<any>{
+    return this.http.delete('/api/membres/' + id)
+      .catch((error: any) => Observable.throw(error.json().error || 'Error al servidor'));
   }
 
 }

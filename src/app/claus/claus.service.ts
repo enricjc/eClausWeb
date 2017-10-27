@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Clau } from './clau.model';
 import { Membre } from '../membres/membre.model';
@@ -11,13 +12,11 @@ import { MembreService } from '../membres/membre.service';
 
 @Injectable()
 export class ClausService {
-  clausChanged = new Subject<Clau[]>();
+  clausChanged = new Subject<any[]>();
+  updPropietariSubscription: Subscription;
 
   constructor(private http: Http,
     private membreService: MembreService) {
-    this.assignarPropietariClau(0, 0);
-    this.assignarPropietariClau(1, 1);
-    this.assignarPropietariClau(2, 2);
   }
 
   getClaus(): Observable<any> {
@@ -39,11 +38,18 @@ export class ClausService {
 
     var params = new URLSearchParams();
     params.append('id', id);
-    params.append('nom', nom);
-    params.append('descripcio', descripcio);
 
-    if (propietari || propietari != '')
+    if (nom) {
+      params.append('nom', nom);
+    }
+
+    if (descripcio) {
+      params.append('descripcio', descripcio);
+    }
+
+    if (propietari) {
       params.append('propietari', propietari);
+    }
 
     var options = new RequestOptions({ headers: headers });
 
@@ -55,12 +61,14 @@ export class ClausService {
 
   // TODO
   // Cal crear la lògica backend MEMBRE abans de modificar aquesta funcionalitat.
-  assignarPropietariClau(indexClau: number, indexMembre: number) {
-    return null;
-    /*if ((this.getClau(indexClau) != null) && (this.membreService.getMembre(indexMembre) != null)) {
-      this.getClau(indexClau).propietari = this.membreService.getMembre(indexMembre);
-      this.clausChanged.next(this.claus.slice());
-    }*/
+  assignarPropietariClau(idClau: string, idMembre: string) {
+    this.updPropietariSubscription = this.updateClau(idClau, null, null, idMembre).subscribe(
+    (data: any) => {
+      console.log(data)
+    },
+    error => console.log(error)
+    );
+    //this.clausChanged.next(this.claus.slice());
   }
 
 }

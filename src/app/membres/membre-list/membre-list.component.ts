@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Membre } from '../membre.model';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,27 +10,51 @@ import { MembreService } from '../membre.service';
   styleUrls: ['./membre-list.component.css']
 })
 export class MembreListComponent implements OnInit, OnDestroy {
-  membres: Membre[];
+  membres: any[];
   subscription: Subscription;
+  getMembresSubscription: Subscription;
+  deleteMembreSubscription: Subscription;
 
-  constructor(private membreService: MembreService) { }
+  constructor(private membresService: MembreService) { }
 
   ngOnInit() {
-    this.subscription = this.membreService.membresChanged
-    .subscribe(
-      (membres: Membre[])=>{
+    /*this.subscription = this.membresService.membresChanged
+      .subscribe(
+      (membres: any[]) => {
         this.membres = membres;
       }
+    );*/
+
+    this.getMembresSubscription = this.membresService.getMembres()
+      .subscribe(
+      (membres: any) => {
+        this.membres = membres;
+      }
+      );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.getMembresSubscription) {
+      this.getMembresSubscription.unsubscribe();
+    }
+    if (this.deleteMembreSubscription) {
+      this.deleteMembreSubscription.unsubscribe();
+    }
+  }
+
+  onDeleteMembre(id: string) {
+    this.deleteMembreSubscription = this.membresService.deleteMembre(id)
+      .subscribe(
+      (membres: any) => {
+        this.membres = this.membres.filter(m => m._id !== id);;
+      },
+      error => console.log(error)
     );
-    this.membres = this.membreService.getMembres();
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
-
-  onDeleteMembre(index: number){
-    this.membreService.deleteMembre(index);
+    //this.membresService.deleteMembre(id);
+    //this.membres = this.membres.filter(m => m._id !== id);;
   }
 
 }

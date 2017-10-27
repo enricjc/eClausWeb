@@ -25,6 +25,7 @@ import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
 import { AlertAssignarClauComponent } from './claus/clau-list/clau-item/modal-assignar-clau-item.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { MembreItemComponent } from './membres/membre-item/membre-item.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SigninComponent } from './auth/signin/signin.component';
     MembreEditComponent,
     AlertAssignarClauComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    MembreItemComponent
   ],
   imports: [
     BrowserModule,
