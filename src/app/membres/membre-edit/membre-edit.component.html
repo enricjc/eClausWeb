@@ -1,44 +1,48 @@
-<div class="row">
-  <div class="col-md-12">
-    <h1>{{membre?.nom}} {{membre?.cognoms}}</h1>
+<div class="container">
+  <div class="titol">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{membre?.nom}} {{membre?.cognoms}}</h1>
+      </div>
+    </div>
   </div>
-</div>
-<hr>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <form [formGroup]="membreForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nom">Nom</label>
-        <input type="text" class="form-control" id="nom" formControlName="nom">
-      </div>
-      <span *ngIf="!membreForm.get('nom').valid && membreForm.get('nom').touched" class="help-block">
+  <hr>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 form">
+      <form [formGroup]="membreForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom" formControlName="nom">
+        </div>
+        <span *ngIf="!membreForm.get('nom').valid && membreForm.get('nom').touched" class="help-block">
         Cal omplir aquest camp
       </span>
-      <div class="form-group">
-        <label for="cognoms">Cognoms</label>
-        <input type="cognoms" class="form-control" id="cognoms" formControlName="cognoms">
-      </div>
-      <span *ngIf="!membreForm.get('cognoms').valid && membreForm.get('cognoms').touched" class="help-block">
+        <div class="form-group">
+          <label for="cognoms">Cognoms</label>
+          <input type="cognoms" class="form-control" id="cognoms" formControlName="cognoms">
+        </div>
+        <span *ngIf="!membreForm.get('cognoms').valid && membreForm.get('cognoms').touched" class="help-block">
         Cal omplir aquest camp
       </span>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email">
-      </div>
-      <span *ngIf="!membreForm.get('email').valid && membreForm.get('email').touched" class="help-block">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <span *ngIf="!membreForm.get('email').valid && membreForm.get('email').touched" class="help-block">
         E-mail no vàlid
       </span>
-      <div class="form-group">
-        <label for="telefon">Telèfon</label>
-        <input type="telefon" class="form-control" id="telefon" formControlName="telefon">
-      </div>
-      <span *ngIf="!membreForm.get('telefon').valid && membreForm.get('telefon').touched" class="help-block">
+        <div class="form-group">
+          <label for="telefon">Telèfon</label>
+          <input type="telefon" class="form-control" id="telefon" formControlName="telefon">
+        </div>
+        <span *ngIf="!membreForm.get('telefon').valid && membreForm.get('telefon').touched" class="help-block">
         Telèfon no vàlid
       </span>
-      <div class="col-md-3 col-md-offset-9">
-        <button class="btn btn-success" type="submit" [disabled]="!membreForm.valid">Desa</button>
-        <button class="btn btn-warning" (click)="onCancel()">Cancela</button>
-      </div>
-    </form>
+        <div class="col-md-3 col-md-offset-9">
+          <button class="btn btn-success" type="submit" [disabled]="!membreForm.valid">Desa</button>
+          <button class="btn btn-warning" (click)="onCancel()">Cancela</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

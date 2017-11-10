@@ -1,0 +1,12 @@
+.membre{
+  text-align: center;
+}
+.membre-nom > h3{
+  color: white;
+}
+.membre-contacte a{
+  color: white;
+}
+.membre-contacte a:hover {
+  color: #316781;
+}

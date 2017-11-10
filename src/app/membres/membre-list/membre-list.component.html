@@ -1,5 +1,8 @@
-<h1>Llistat de membres</h1>
-<hr>
+<div class="container">
+  <div class="titol">
+    <h1>Llistat de membres</h1>
+    <hr>
+  </div>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -11,17 +14,14 @@
             <th>Telefòn</th>
             <th>Email</th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          <!--LOOP per cada membre actiu -->
           <tr *ngFor="let membre of membres; let i = index">
             <td>{{membre?.nom}}</td>
             <td>{{membre?.cognoms}}</td>
             <td>{{membre?.telefon}}</td>
             <td>{{membre?.email}}</td>
-            <td><a (click)="onAssign()" ><img src="http://via.placeholder.com/30x30"></a></td>
             <td>
               <span style="cursor: pointer;" class="glyphicon glyphicon-list-alt" [routerLink]="['/membres', membre?._id]"></span>
               <span style="cursor: pointer;" class="glyphicon glyphicon-remove" (click)="onDeleteMembre(membre?._id)"></span>

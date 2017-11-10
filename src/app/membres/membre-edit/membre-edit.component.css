@@ -1,15 +1,51 @@
-h5{
-  margin-left: 20px;
+.container {
+  background-color: #316781;
+  border-top-left-radius: 8%;
+  border-top-right-radius: 8%;
+  border-bottom-left-radius: 8%;
+  border-bottom-right-radius: 8%;
+  padding-bottom: 20px;
+}
+.titol{
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-bottom: 20px;
+  background-color: #97a8b9;
+  border-top-left-radius: 20%;
+  border-top-right-radius: 20%;
+  border-bottom-left-radius: 2%;
+  border-bottom-right-radius: 2%;
+}
+.titol h1{
+  color: white;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
-.form-control.ng-touched.ng-invalid{
-  border: 1px solid red;
+label {
+  margin-right:10px;
 }
 
-.form-control.ng-touched.ng-valid{
-  border: 1px solid green;
+.form {
+  background-color: #97a8b9;
+  border-top-left-radius: 8%;
+  border-top-right-radius: 8%;
+  border-bottom-left-radius: 8%;
+  border-bottom-right-radius: 8%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-
-.help-block{
-  color:red;
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid #f38e8e;
+  background-color: #f3d1d1;
+}
+.form-control.ng-touched.ng-valid {
+  border: 2px solid green;
+}
+.help-block {
+  color: white;
+}
+.button {
+  padding-bottom: 2vh;
 }

@@ -1,17 +1,20 @@
-<h1>Llistat claus disponibles</h1>
-<hr>
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let clau of claus">
-    <div class="row">
-      <div class="col-md-2">
-        <a style="cursor: pointer;" (click)="onChange(clau._id)"><img src="http://via.placeholder.com/100x100"></a>
+<div class="container">
+  <div class="titol">
+    <h1>Llistat claus disponibles</h1>
+    <hr>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let clau of claus">
+      <div class="row row-eq-height">
+        <div class="col-md-2 clau-canvi">
+          <a style="cursor: pointer;" (click)="onChange(clau._id)"><img src="http://via.placeholder.com/100x100"></a>
+        </div>
+        <div class="col-md-6">
+          <app-clau-item [clau]="clau" sid="{{clau._id}}"></app-clau-item>
+        </div>
+        <div class="col-md-4">
+          <app-membre-item sid="{{clau.propietari}}"></app-membre-item>
+        </div>
       </div>
-      <div class="col-md-6">
-        <app-clau-item  [clau]="clau" sid="{{clau._id}}"></app-clau-item>
-      </div>
-      <div class="col-md-4">
-        <app-membre-item  sid="{{clau.propietari}}"></app-membre-item>
-      </div>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>

@@ -1,15 +1,19 @@
-<div class="row">
-  <div class="col-md-12">
-    <h1>{{clau?.nom}}</h1>
+<div class="container">
+  <div class="titol">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{clau?.nom}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <h4>{{clau?.descripcio}}</h4>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary" routerLink="edit">Edita</button>
+      </div>
+    </div>
   </div>
+  <hr>
+  <router-outlet></router-outlet>
 </div>
-<div class="row">
-  <div class="col-md-10">
-    <h5>{{clau?.descripcio}}</h5>
-  </div>
-  <div class="col-md-2">
-    <button class="btn btn-primary" routerLink="edit">Edita</button>
-  </div>
-</div>
-<hr>
-<router-outlet></router-outlet>

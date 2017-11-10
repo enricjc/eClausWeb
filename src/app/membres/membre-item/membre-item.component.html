@@ -1,9 +1,15 @@
-<div class="col-md-12">
-  <h3>{{membre?.nom}} {{membre?.cognoms}}</h3>
-  <a style="cursor: pointer;" data-toggle="tooltip" title={{membre?.telefon}}>
+<div class="row">
+  <div class="col-md-12 membre">
+    <div class="membre-nom">
+      <h3>{{membre?.nom}} {{membre?.cognoms}}</h3>
+    </div>
+    <div class="membre-contacte">
+      <a style="cursor: pointer;" data-toggle="tooltip" title={{membre?.telefon}}>
       <span class="glyphicon glyphicon-earphone" style="margin-left:10px;">Trucada</span>
     </a>
-  <a style="cursor: pointer;" data-toggle="tooltip" title={{membre?.email}}>
+      <a style="cursor: pointer;" data-toggle="tooltip" title={{membre?.email}}>
       <span class="glyphicon glyphicon-phone" style="margin-left:10px;">Missatge</span>
     </a>
+    </div>
+  </div>
 </div>

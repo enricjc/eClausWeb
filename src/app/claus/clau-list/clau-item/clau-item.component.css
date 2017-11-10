@@ -1,8 +1,25 @@
-a:hover{
-  text-decoration: none;
+.clau{
+  background-color: #97a8b9;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
 }
-
-.clau-nom:hover {
+.clau:hover {
     background-color: #d3d3d3;
-    color:black;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+.clau a{
+  background-color: white;
+  text-decoration: none;
+  text-align: center;
+
+}
+.clau a:hover{
+  color:black;
+  text-decoration: none;
+  text-align: center;
 }

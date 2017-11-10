@@ -1,0 +1,24 @@
+.container-fluid{
+  background-color:#97a8b9;
+  border: 2px solid #FFFFFF;
+}
+.navbar-brand, ul > li > a{
+  color:#FFFFFF;
+}
+.navbar-brand:hover, ul > li > a:hover{
+  color:#bec7cc;
+  background-color:#316781;
+  border-top-left-radius:15%;
+  border-top-right-radius:15%;
+  border-bottom-left-radius:15%;
+  border-bottom-right-radius:15%;
+}
+
+.active{
+  color:#bec7cc;
+  background-color:#316781;
+  border-top-left-radius:15%;
+  border-top-right-radius:15%;
+  border-bottom-left-radius:15%;
+  border-bottom-right-radius:15%;
+}
