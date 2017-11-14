@@ -4,6 +4,16 @@
     <hr>
   </div>
   <div class="row">
+    <div class="col-md-2 afegir">
+      <a routerLink="new">
+        <h4>
+          <span style="cursor: pointer;" class="glyphicon glyphicon-plus-sign"></span> Afegir membre
+        </h4>
+      </a>
+    </div>
+    <div class="col-md-10"></div>
+  </div>
+  <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
         <table class="table table-striped" [mfData]="membres" #mf="mfDataTable" [mfRowsOnPage]="10" mfSortBy="nom" mfSortOrder="asc">
@@ -38,7 +48,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="4">
+              <td colspan="5">
                 <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
               </td>
             </tr>

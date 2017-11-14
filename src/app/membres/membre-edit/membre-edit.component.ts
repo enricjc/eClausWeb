@@ -15,8 +15,10 @@ import { Membre } from '../membre.model';
 export class MembreEditComponent implements OnInit {
   membre: any;
   id: string;
+  isEdit = false;
   membreForm: FormGroup;
   getMembreSubscription: Subscription;
+  insertMembreSubscription: Subscription;
   updateMembreSubscription: Subscription;
 
   constructor(private membreService: MembreService,
@@ -28,23 +30,25 @@ export class MembreEditComponent implements OnInit {
       .subscribe(
       (params: Params) => {
         this.id = params['id'];
+        this.isEdit = params['id'] != null;
       }
-      )
-
-    this.getMembreSubscription = this.membreService.getMembre(this.id)
-      .subscribe(
-      (membre: any) => {
-        this.membre = membre;
-        this.membreForm.patchValue({
-          nom: this.membre.nom,
-          cognoms: this.membre.cognoms,
-          telefon: this.membre.telefon,
-          email: this.membre.email,
-        });
-      },
-      error => console.log(error)
       );
 
+    if (this.id != null) {
+      this.getMembreSubscription = this.membreService.getMembre(this.id)
+        .subscribe(
+        (membre: any) => {
+          this.membre = membre;
+          this.membreForm.patchValue({
+            nom: this.membre.nom,
+            cognoms: this.membre.cognoms,
+            telefon: this.membre.telefon,
+            email: this.membre.email,
+          });
+        },
+        error => console.log(error)
+        );
+    }
     this.initForm();
   }
 
@@ -74,18 +78,32 @@ export class MembreEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.updateMembreSubscription = this.membreService.updateMembre(
-      this.membre._id,
-      this.membreForm.value.nom,
-      this.membreForm.value.cognoms,
-      this.membreForm.value.telefon,
-      this.membreForm.value.email)
-      .subscribe(
-      (membre: any) => {
-        this.router.navigate(['../'], { relativeTo: this.route });
-      },
-      error => console.log(error)
-      );
+    if (this.isEdit) {
+      this.updateMembreSubscription = this.membreService.updateMembre(
+        this.membre._id,
+        this.membreForm.value.nom,
+        this.membreForm.value.cognoms,
+        this.membreForm.value.telefon,
+        this.membreForm.value.email)
+        .subscribe(
+        (membre: any) => {
+          this.router.navigate(['/membres']);
+        },
+        error => console.log(error)
+        );
+    } else {
+      this.insertMembreSubscription = this.membreService.insertMembre(
+        this.membreForm.value.nom,
+        this.membreForm.value.cognoms,
+        this.membreForm.value.telefon,
+        this.membreForm.value.email)
+        .subscribe(
+        (membre: any) => {
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error => console.log(error)
+        );
+    }
   }
 
 }

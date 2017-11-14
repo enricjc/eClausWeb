@@ -6,7 +6,8 @@
   border-bottom-right-radius: 8%;
   padding-bottom: 20px;
 }
-.titol{
+
+.titol {
   margin-top: 30px;
   margin-left: 15px;
   margin-right: 15px;
@@ -16,34 +17,68 @@
   border-bottom-left-radius: 2%;
   border-bottom-right-radius: 2%;
 }
-.titol h1{
+
+.titol h1 {
   color: white;
   text-align: center;
   padding-top: 10px;
 }
-.panel{
+
+.panel {
   background-color: #97a8b9;
+  margin-top: 10px;
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 3px;
 }
-.table-striped>thead{
+
+.table-striped>thead {
   background-color: #b9c2c7;
   color: black;
 }
-.table-striped>tbody>tr:nth-child(odd)>td,
-.table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: white;
-   color: black;
- }
- .table-striped>tbody>tr:nth-child(even)>td,
-.table-striped>tbody>tr:nth-child(even)>th {
-   background-color: #97a8b9;
-   color: white;
- }
-.table td, .table th{
-   text-align: center;
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: white;
+  color: black;
 }
+
+.table-striped>tbody>tr:nth-child(even)>td, .table-striped>tbody>tr:nth-child(even)>th {
+  background-color: #97a8b9;
+  color: white;
+}
+
+.table th{
+  color: black;
+}
+
+.table td, .table th {
+  text-align: center;
+}
+
 span.glyphicon {
   margin-left: 5px;
+}
+
+.afegir {
+  margin-left: 40px;
+  margin-right: 80px;
+  border-top-left-radius: 15%;
+  border-top-right-radius: 15%;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+  background-color: #97a8b9;
+}
+
+.afegir a>h4 {
+  text-align: left;
+  color: white;
+}
+
+.afegir a>h4:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.afegir a>h4>span.glyphicon-plus-sign {
+  margin-right: 15px;
 }

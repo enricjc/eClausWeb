@@ -21,6 +21,7 @@ const appRoutes: Routes = [
   {
     path: 'membres', component: MembresComponent, canActivate: [AuthGuard], children:[
       { path: '', component: MembreListComponent, pathMatch: 'full' },
+      { path: 'new', component: MembreEditComponent },
       { path: ':id', component: MembreDetallComponent },
       { path: ':id/edit', component: MembreEditComponent },
     ] },
