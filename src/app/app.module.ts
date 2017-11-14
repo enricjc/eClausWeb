@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import {DataTableModule} from "angular2-datatable";
 
 import { MembreService } from './membres/membre.service';
 import { ClausService } from './claus/claus.service';
@@ -53,7 +54,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    BootstrapModalModule
+    BootstrapModalModule,
+    DataTableModule
   ],
   providers: [ClausService, MembreService, AuthService, AuthGuard, DataService],
   entryComponents: [
