@@ -26,6 +26,7 @@ import { AlertAssignarClauComponent } from './claus/clau-list/clau-item/modal-as
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { MembreItemComponent } from './membres/membre-item/membre-item.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MembreItemComponent } from './membres/membre-item/membre-item.component
     AlertAssignarClauComponent,
     SignupComponent,
     SigninComponent,
-    MembreItemComponent
+    MembreItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

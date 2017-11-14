@@ -11,27 +11,30 @@ import { ClauListComponent } from './claus/clau-list/clau-list.component';
 import { ClauEditComponent } from './claus/clau-edit/clau-edit.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import {AuthGuard} from './auth/auth.guard';
 
 const appRoutes: Routes = [
   { path: '',  redirectTo: 'signup', pathMatch: 'full' },
-  { path: 'api', component: SignupComponent },
+  { path: 'api', redirectTo: '/404' },
   {
     path: 'membres', component: MembresComponent, canActivate: [AuthGuard], children:[
       { path: '', component: MembreListComponent, pathMatch: 'full' },
       { path: ':id', component: MembreDetallComponent },
-      { path: ':id/edit', component: MembreEditComponent }
+      { path: ':id/edit', component: MembreEditComponent },
     ] },
   {
     path: 'claus', component: ClausComponent, canActivate: [AuthGuard], children: [
       { path: '', component: ClauListComponent, pathMatch: 'full' },
       { path: ':id', component: ClauDetallComponent },
-      { path: ':id/edit', component: ClauEditComponent }
+      { path: ':id/edit', component: ClauEditComponent },
     ]
   },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
+  { path: '**',  redirectTo: '/404' },
+  {path: '404', component: NotFoundComponent}
 ];
 
 @NgModule({
