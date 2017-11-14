@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Membre } from '../membre.model';
 import { Subscription } from 'rxjs/Subscription';
+import { ConfirmComponent } from '../../shared/modal/confirm/confirm.component';
 
+import { DialogService } from 'ng2-bootstrap-modal';
 import { MembreService } from '../membre.service';
 
 @Component({
@@ -14,8 +16,10 @@ export class MembreListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   getMembresSubscription: Subscription;
   deleteMembreSubscription: Subscription;
+  confirmEsborrar = false;
 
-  constructor(private membresService: MembreService) { }
+  constructor(private membresService: MembreService,
+    private dialogService: DialogService) { }
 
   ngOnInit() {
     /*this.subscription = this.membresService.membresChanged
@@ -46,15 +50,22 @@ export class MembreListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteMembre(id: string) {
-    this.deleteMembreSubscription = this.membresService.deleteMembre(id)
-      .subscribe(
-      (membres: any) => {
-        this.membres = this.membres.filter(m => m._id !== id);;
-      },
-      error => console.log(error)
-    );
-    //this.membresService.deleteMembre(id);
-    //this.membres = this.membres.filter(m => m._id !== id);;
+    this.dialogService.addDialog(ConfirmComponent, {
+      titol: 'Esborra membre',
+      missatge: 'Vols esborrar aquest membre?'
+    })
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+          this.deleteMembreSubscription = this.membresService.deleteMembre(id)
+            .subscribe(
+            (membres: any) => {
+              this.membres = this.membres.filter(m => m._id !== id);;
+            },
+            error => console.log(error)
+            );
+        }
+      });
+
   }
 
 }

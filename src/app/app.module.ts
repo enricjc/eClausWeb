@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import {DataTableModule} from "angular2-datatable";
+import { DataTableModule } from "angular2-datatable";
 
 import { MembreService } from './membres/membre.service';
 import { ClausService } from './claus/claus.service';
-import { AuthService} from './auth/auth.service';
-import {AuthGuard} from './auth/auth.guard';
-import { DataService} from './data.service';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { DataService } from './data.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -28,6 +28,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { MembreItemComponent } from './membres/membre-item/membre-item.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ConfirmComponent } from './shared/modal/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SignupComponent,
     SigninComponent,
     MembreItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -59,8 +61,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   providers: [ClausService, MembreService, AuthService, AuthGuard, DataService],
   entryComponents: [
-        AlertAssignarClauComponent
-      ],
+    AlertAssignarClauComponent,
+    ConfirmComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,19 @@
+.modal-header {
+  background-color: #316781;
+  color: white;
+}
+
+.modal-content {
+  background-color: #97a8b9;
+  font-weight: bold;
+  color: white;
+}
+
+.modal-footer {
+  background-color: #97a8b9;
+}
+
+.close {
+  color: white;
+  opacity: 100;
+}
