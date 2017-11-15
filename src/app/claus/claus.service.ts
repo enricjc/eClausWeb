@@ -12,7 +12,7 @@ import { MembreService } from '../membres/membre.service';
 
 @Injectable()
 export class ClausService {
-  clausChanged = new Subject<any[]>();
+  clausChanged = new Subject<any>();
   updPropietariSubscription: Subscription;
 
   constructor(private http: Http,
@@ -63,12 +63,12 @@ export class ClausService {
   // Cal crear la lògica backend MEMBRE abans de modificar aquesta funcionalitat.
   assignarPropietariClau(idClau: string, idMembre: string) {
     this.updPropietariSubscription = this.updateClau(idClau, null, null, idMembre).subscribe(
-    (data: any) => {
-      console.log(data)
-    },
-    error => console.log(error)
+      (data: any) => {
+        this.clausChanged.next(data);
+      },
+      error => this.clausChanged.next(null)
     );
-    //this.clausChanged.next(this.claus.slice());
+
   }
 
 }

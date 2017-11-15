@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()">&times;</button>
+      <h4 class="modal-title">{{titol || 'Menú de selecció'}}</h4>
+    </div>
+    <div class="modal-body">
+      <p>{{missatge || 'Selecciona un element'}}</p>
+    </div>
+    <div class="form-group">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <select class="form-control" formControlName="selected" id="selected">
+                                <option *ngFor="let it of llista; let i = index;"
+                                       [value]="it._id">
+                                 {{it.nom}} {{it.cognoms}}
+                               </option>
+                             </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Selecciona</button>
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancela</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

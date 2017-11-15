@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { AlertAssignarClauComponent } from './clau-item/modal-assignar-clau-item.component';
+import { AlertComponent } from '../../shared/modal/alert/alert.component';
+import { DropDownSelectModalComponent } from '../../shared/modal/dropdown-select-modal/dropdown-select-modal.component';
 import { ClausService } from '../claus.service';
 import { DialogService } from 'ng2-bootstrap-modal';
 
@@ -13,20 +15,29 @@ export class ClauListComponent implements OnInit, OnDestroy {
   claus: any[]
   idClauChanged: string;
   propietariChangedSubscription: Subscription;
-  clausSubs: Subscription;
+  showAlert = false;
+  clausSubscription: Subscription;
 
   constructor(private clausService: ClausService, private dialogService: DialogService) { }
 
   ngOnInit() {
-    // TODO
-    // Cal crear la lògica backend MEMBRE abans de modificar aquesta funcionalitat.
-    /*this.propietariChangedSubscription = this.clausService.propietariChanged
+    this.propietariChangedSubscription = this.clausService.clausChanged
       .subscribe(
-        (propietari: any) => {
-          this.claus.filter(c=>c._id == this.idClauChanged);
+      (data: any) => {
+        if (data != null) {
+          this.clausSubscription = this.clausService.getClaus()
+            .subscribe(
+            (claus: any) => {
+              this.claus = claus;
+            }
+            );
+        } else {
+          this.showAlert = true;
         }
-    );*/
-    this.clausSubs = this.clausService.getClaus()
+      }
+      );
+
+    this.clausSubscription = this.clausService.getClaus()
       .subscribe(
       (claus: any) => {
         this.claus = claus;
@@ -35,19 +46,30 @@ export class ClauListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.clausSubs) {
-      this.clausSubs.unsubscribe();
+    if (this.clausSubscription) {
+      this.clausSubscription.unsubscribe();
+    }
+    if (this.propietariChangedSubscription) {
+      this.propietariChangedSubscription.unsubscribe();
     }
   }
 
   onChange(idClau: string) {
     this.idClauChanged = idClau;
-    this.dialogService.addDialog(AlertAssignarClauComponent,
-      {
-        title: 'Assignació de claus',
-        message: 'Selecciona el nou propietari',
-        idClau: idClau
+
+    this.dialogService.addDialog(DropDownSelectModalComponent, {
+      titol: 'Assignació de claus',
+      missatge: 'Selecciona el nou propietari'
+    })
+      .subscribe((idNouPropietari) => {
+        if (idNouPropietari != null && idClau != null) {
+          this.clausService.assignarPropietariClau(idClau, idNouPropietari);
+        }
       });
+  }
+
+  cancelAlert() {
+    this.showAlert = false;
   }
 
 }

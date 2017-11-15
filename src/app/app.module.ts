@@ -28,7 +28,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { MembreItemComponent } from './membres/membre-item/membre-item.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AlertComponent } from './shared/modal/alert/alert.component';
 import { ConfirmComponent } from './shared/modal/confirm/confirm.component';
+import { DropDownSelectModalComponent } from './shared/modal/dropdown-select-modal/dropdown-select-modal.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ConfirmComponent } from './shared/modal/confirm/confirm.component';
     SigninComponent,
     MembreItemComponent,
     NotFoundComponent,
-    ConfirmComponent
+    AlertComponent,
+    ConfirmComponent,
+    DropDownSelectModalComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ import { ConfirmComponent } from './shared/modal/confirm/confirm.component';
   providers: [ClausService, MembreService, AuthService, AuthGuard, DataService],
   entryComponents: [
     AlertAssignarClauComponent,
-    ConfirmComponent
+    AlertComponent,
+    ConfirmComponent,
+    DropDownSelectModalComponent
   ],
   bootstrap: [AppComponent]
 })
