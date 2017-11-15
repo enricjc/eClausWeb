@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { AlertAssignarClauComponent } from './clau-item/modal-assignar-clau-item.component';
-import { AlertComponent } from '../../shared/modal/alert/alert.component';
+import { AlertMessageComponent } from '../../shared/alert-message/alert-message.component';
 import { DropDownSelectModalComponent } from '../../shared/modal/dropdown-select-modal/dropdown-select-modal.component';
 import { ClausService } from '../claus.service';
 import { DialogService } from 'ng2-bootstrap-modal';
@@ -15,8 +15,13 @@ export class ClauListComponent implements OnInit, OnDestroy {
   claus: any[]
   idClauChanged: string;
   propietariChangedSubscription: Subscription;
-  showAlert = false;
   clausSubscription: Subscription;
+  alertMessage: any = {
+    mostra: false,
+    titol: "",
+    missatge: "",
+    tipus: ""
+  };
 
   constructor(private clausService: ClausService, private dialogService: DialogService) { }
 
@@ -32,7 +37,12 @@ export class ClauListComponent implements OnInit, OnDestroy {
             }
             );
         } else {
-          this.showAlert = true;
+          this.alertMessage = {
+            mostra: true,
+            titol: "Error inesperat:",
+            missatge: "No s'han pogut desar els canvis, intenta-ho més tard si us plau",
+            tipus: "danger"
+          }
         }
       }
       );
@@ -41,9 +51,16 @@ export class ClauListComponent implements OnInit, OnDestroy {
       .subscribe(
       (claus: any) => {
         this.claus = claus;
+      },
+      (error) => this.alertMessage = {
+        mostra: true,
+        titol: "Error inesperat:",
+        missatge: "No s'han pogut carregar les dades, intenta-ho més tard si us plau",
+        tipus: "danger"
       }
       );
   }
+
 
   ngOnDestroy() {
     if (this.clausSubscription) {
@@ -54,7 +71,7 @@ export class ClauListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChange(idClau: string) {
+  onChangePropietari(idClau: string) {
     this.idClauChanged = idClau;
 
     this.dialogService.addDialog(DropDownSelectModalComponent, {
@@ -68,8 +85,8 @@ export class ClauListComponent implements OnInit, OnDestroy {
       });
   }
 
-  cancelAlert() {
-    this.showAlert = false;
+  onShowAlertMessage(showAlert) {
+    this.alertMessage.mostra = showAlert;
   }
 
 }

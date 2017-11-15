@@ -17,22 +17,27 @@ export class MembreListComponent implements OnInit, OnDestroy {
   getMembresSubscription: Subscription;
   deleteMembreSubscription: Subscription;
   confirmEsborrar = false;
+  alertMessage: any = {
+    mostra: false,
+    titol: "",
+    missatge: "",
+    tipus: ""
+  };
 
   constructor(private membresService: MembreService,
     private dialogService: DialogService) { }
 
   ngOnInit() {
-    /*this.subscription = this.membresService.membresChanged
-      .subscribe(
-      (membres: any[]) => {
-        this.membres = membres;
-      }
-    );*/
-
     this.getMembresSubscription = this.membresService.getMembres()
       .subscribe(
       (membres: any) => {
         this.membres = membres;
+      },
+      (error) => this.alertMessage = {
+        mostra: true,
+        titol: "Error inesperat:",
+        missatge: "No s'han pogut carregar les dades, intenta-ho més tard si us plau",
+        tipus: "danger"
       }
       );
   }
@@ -61,11 +66,19 @@ export class MembreListComponent implements OnInit, OnDestroy {
             (membres: any) => {
               this.membres = this.membres.filter(m => m._id !== id);;
             },
-            error => console.log(error)
+            (error) => this.alertMessage = {
+              mostra: true,
+              titol: "Error inesperat:",
+              missatge: "No s'han pogut esborrar el membre, intenta-ho més tard si us plau",
+              tipus: "danger"
+            }
             );
         }
       });
+  }
 
+  onShowAlertMessage(showAlert) {
+    this.alertMessage.mostra = showAlert;
   }
 
 }

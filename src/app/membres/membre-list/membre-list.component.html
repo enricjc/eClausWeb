@@ -3,57 +3,60 @@
     <h1>Llistat de membres</h1>
     <hr>
   </div>
-  <div class="row">
-    <div class="col-md-2 afegir">
-      <a routerLink="new">
-        <h4>
+    <app-alert-message titol="{{alertMessage.titol}}" missatge="{{alertMessage.missatge}}" tipus="{{alertMessage.tipus}}" *ngIf="this.alertMessage.mostra" (showAlert)="onShowAlertMessage($event)"></app-alert-message>
+    <div *ngIf="membres?.length > 0">
+      <div class="row">
+        <div class="col-md-2 afegir">
+          <a routerLink="new">
+            <h4>
           <span style="cursor: pointer;" class="glyphicon glyphicon-plus-sign"></span> Afegir membre
         </h4>
-      </a>
-    </div>
-    <div class="col-md-10"></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <table class="table table-striped" [mfData]="membres" #mf="mfDataTable" [mfRowsOnPage]="10" mfSortBy="nom" mfSortOrder="asc">
-          <thead>
-            <tr>
-              <th>
-                <mfDefaultSorter by="nom">Nom</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter by="cognoms">Cognoms</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter by="telefon">Telèfon</mfDefaultSorter>
-              </th>
-              <th>
-                <mfDefaultSorter by="email">Email</mfDefaultSorter>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let membre of mf.data; let i = index">
-              <td>{{membre?.nom}}</td>
-              <td>{{membre?.cognoms}}</td>
-              <td>{{membre?.telefon}}</td>
-              <td>{{membre?.email}}</td>
-              <td>
-                <span style="cursor: pointer;" class="glyphicon glyphicon-list-alt" [routerLink]="['/membres', membre?._id]"></span>
-                <span style="cursor: pointer;" class="glyphicon glyphicon-remove" (click)="onDeleteMembre(membre?._id)"></span>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+          </a>
+        </div>
+        <div class="col-md-10"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <table class="table table-striped" [mfData]="membres" #mf="mfDataTable" [mfRowsOnPage]="10" mfSortBy="nom" mfSortOrder="asc">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="nom">Nom</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="cognoms">Cognoms</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="telefon">Telèfon</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let membre of mf.data; let i = index">
+                  <td>{{membre?.nom}}</td>
+                  <td>{{membre?.cognoms}}</td>
+                  <td>{{membre?.telefon}}</td>
+                  <td>{{membre?.email}}</td>
+                  <td>
+                    <span style="cursor: pointer;" class="glyphicon glyphicon-list-alt" [routerLink]="['/membres', membre?._id]"></span>
+                    <span style="cursor: pointer;" class="glyphicon glyphicon-remove" (click)="onDeleteMembre(membre?._id)"></span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
