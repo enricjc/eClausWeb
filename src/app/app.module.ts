@@ -31,6 +31,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertComponent } from './shared/modal/alert/alert.component';
 import { ConfirmComponent } from './shared/modal/confirm/confirm.component';
 import { DropDownSelectModalComponent } from './shared/modal/dropdown-select-modal/dropdown-select-modal.component';
+import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { DropDownSelectModalComponent } from './shared/modal/dropdown-select-mod
     NotFoundComponent,
     AlertComponent,
     ConfirmComponent,
-    DropDownSelectModalComponent
+    DropDownSelectModalComponent,
+    AlertMessageComponent
   ],
   imports: [
     BrowserModule,
